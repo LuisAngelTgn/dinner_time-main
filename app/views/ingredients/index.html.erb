@@ -1,0 +1,13 @@
+<h1>Buscar recetas por ingredientes</h1>
+<%= form_tag(recipes_search_path, method: :get, class: "form-inline") do %>
+  <div class="form-group">
+    <label for="ingredient_ids">Selecciona ingredientes (puedes seleccionar varios):</label>
+    <select multiple class="form-control" id="ingredient_ids" name="ingredients[]">
+      <% @ingredients.each do |ingredient| %>
+        <option value="<%= ingredient.id %>"><%= ingredient.name %></option>
+      <% end %>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Buscar</button>
+<% end %>
+

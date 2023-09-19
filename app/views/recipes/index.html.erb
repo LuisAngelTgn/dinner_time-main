@@ -1,0 +1,5 @@
+<%#= render partial: 'recipes_selection' %>
+
+<% @recipes.each do |recipe| %>
+  <p><%= recipe.title %></p>
+<% end %>

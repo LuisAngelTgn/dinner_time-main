@@ -1,0 +1,14 @@
+<!-- app/views/recipes/search.html.erb -->
+<h1>Recipes that you can cook:</h1>
+<% if @recipes.any? %>
+  <ul style="list-style: none">
+    <% @recipes.each do |recipe| %>
+      <li>
+        <%=  recipe.title %><br>
+        <%= image_tag recipe.image, alt: recipe.title, style: 'width: 150px' %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No se encontraron recetas con los ingredientes seleccionados.</p>
+<% end %>

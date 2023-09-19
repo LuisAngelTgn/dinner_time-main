@@ -1,0 +1,47 @@
+<h1>It's <span style = "color:#c5e1f9">Dinner Time!</span></h1>
+<p>Cook every day a new delicious dish with the ingredients that you have at home</p>
+<p>Choose from <%= @recipes.count%> </b> amazing recipes!</p>
+
+<%= link_to "Start", ingredients_path, class: "btn btn-success" %>
+
+<div id="carouselExampleCaptions" class="carousel slide" style="width: 50%;
+    margin: auto; padding-top: 15px" data-bs-ride="carousel" data-bs-interval="2200">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+       <%= image_tag(@recipes_images.first, class: "d-block w-100", alt: "Image 1") %>
+      <div class="carousel-caption d-none d-md-block">
+      </div>
+    </div>
+    <div class="carousel-item">
+        <%= image_tag(@recipes_images.fifth, class: "d-block w-100", alt: "Image 2") %>
+      <div class="carousel-caption d-none d-md-block">
+      </div>
+    </div>
+    <div class="carousel-item">
+        <%= image_tag(@recipes_images.fourth, class: "d-block w-100", alt: "Image 3") %>
+      <div class="carousel-caption d-none d-md-block">
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true" style="color:black; background-color:black"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true" style="color:black; background-color:black"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+
+
+
+
+
