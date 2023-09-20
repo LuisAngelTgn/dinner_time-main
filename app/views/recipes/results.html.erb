@@ -8,7 +8,7 @@
     }
 </style>
 
-<h1>Recipes that you can cook:</h1>
+<h1>Recipes that you can choose from:</h1>
 <% if @recipes.any? %>
   <div style="list-style: none; margin-top: 20px " class="row">
     <div class="col-md-9 ">
@@ -39,7 +39,9 @@
       <% end %>
     </div>
 
-    <div class="col-md-3 " style="background-color: #c5e1f9; height: 100%; padding: 2% 0%;">
+    <div class="col-md-3 " style="background-color: #c5e1f9; height: 800px;
+      padding: 2% 0%;
+      overflow: auto;">
       <h5>Selected ingredients</h5>
       <p style="text-decoration-line: underline">Ingredients that you have</p>
       <% @selected_ingredients.each do |selected_ingredient| %>

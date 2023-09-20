@@ -3,19 +3,26 @@
   <div class="form-group">
     <input class="form-control" id="myInput" type="text" placeholder="Search..">
     <label for="ingredient_ids">Select ingredients (maximum 5):</label>
-    <select multiple class="form-control" id="ingredient_ids" name="ingredients[]">
+    <select multiple class="form-control" id="ingredient_ids" name="ingredients[]" style="height: 210px;">
       <% @ingredients.each do |ingredient| %>
-        <option value="<%= ingredient.id %>"><%= ingredient.name.gsub(/\d+/, '').gsub('cup', '').gsub('teaspoon', '').gsub('spoon', '').gsub('½', '').gsub('⅔', '').gsub('s ', '').strip %></option>
+        <option value="<%= ingredient.id %>"><%= ingredient.name.gsub(/\d+/, '').gsub('(. ounce)', '').gsub('cup', '').gsub('( ounce)', '').gsub('. ', '').gsub('½', '').gsub('⅔', '').gsub('s ', '').strip %></option>
       <% end %>
     </select>
+    <h5>Selected ingredients</h5>
+    <ul class="list-group" style="list-style: none">
+      <li class="list-group-item" style=" background-color: #c5e1f9; color:green" id="selectedIngredientsList"></li>
+    </ul>
+    <ul style="list-style: none" ></ul>
   </div>
   <button type="submit" class="btn btn-primary">Search</button>
 <% end %>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var select = document.getElementById('ingredient_ids');
         var maxSelections = 5;
+        var myInput = document.getElementById('myInput');
 
         $('#ingredient_ids option').mousedown(function (e) {
             e.preventDefault();
@@ -27,6 +34,9 @@
                 $(this).prop('selected', false);
             }
 
+            updateSelectedIngredientsList();
+            myInput.value = '';
+
             return false;
         });
 
@@ -35,7 +45,20 @@
             $("#ingredient_ids option").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
             });
+
+            updateSelectedIngredientsList();
         });
+
+        function updateSelectedIngredientsList() {
+            var selectedOptions = $('#ingredient_ids option:selected');
+            var selectedIngredientsList = $('#selectedIngredientsList');
+            selectedIngredientsList.empty(); // Limpiar la lista actual
+
+            selectedOptions.each(function () {
+                var ingredientName = $(this).text();
+                selectedIngredientsList.append('<li>' + ingredientName + '</li>');
+            });
+        }
     });
 </script>
 

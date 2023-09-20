@@ -12,7 +12,7 @@ class RecipesController < ApplicationController
                   .joins(:ingredients_recipes)
                   .where('ingredients_recipes.ingredient_id IN (?)', selected_ingredient_ids)
                   .group('recipes.id')
-                  .having('COUNT(DISTINCT ingredients_recipes.ingredient_id) = ?', selected_ingredient_ids.count)
+
 
       @ingredients_not_included = Ingredient
                                     .joins(:recipes)
