@@ -1,22 +1,58 @@
-<!-- app/views/recipes/search.html.erb -->
+<style>
+    .card {
+        width: 18rem;
+        float: left;
+        max-height: 645px;
+        overflow: auto;
+        min-height: 645px;
+    }
+</style>
+
 <h1>Recipes that you can cook:</h1>
 <% if @recipes.any? %>
-  <div style="list-style: none">
-    <% @recipes.each do |recipe| %>
-     <h2> <%=  recipe.title %></h2>
-        <%= image_tag recipe.image, alt: recipe.title, style: 'width: 150px' %>
-    <% end %>
-    <h5>Selected ingredients</h5>
-    <% @selected_ingredients.each do |selected_ingredient| %>
-        <b style="color:green"><%=  selected_ingredient.name %><br></b>
-    <% end %>
+  <div style="list-style: none; margin-top: 20px " class="row">
+    <div class="col-md-9 ">
+      <% @recipes.limit(12).each do |recipe| %>
+        <div class="card">
+          <div style="width: 100%"> <%= image_tag recipe.image, alt: recipe.title, style: "width:100%;" %></div>
+          <div class="card-body">
+            <h5 class="card-title"><%= recipe.title %></h5>
+            <p style="text-decoration-line: underline">Ingredients that you have</p>
+            <% ingredients_recipe = recipe.ingredients
+               ingredients_recipe.each do |ingredient|
+            %>
+              <% if @selected_ingredients.include?(ingredient) %>
+                <li style="color:green"><%= ingredient.name %></li>
+              <% end %>
+            <% end %>
+            <br>
+            <p style="text-decoration-line: underline">Ingredients you might need</p>
+            <% ingredients_recipe = recipe.ingredients
+               ingredients_recipe.each do |ingredient|
+            %>
+              <% unless @selected_ingredients.include?(ingredient) %>
+                <li style="color:red"><%= ingredient.name %></li>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
 
-    <%     @ingredients_not_included.each do |selected_ingredient| %>
-      <b style="color:red"><%=  selected_ingredient.name %><br></b>
-    <% end %>
+    <div class="col-md-3 " style="background-color: #c5e1f9; height: 100%; padding: 2% 0%;">
+      <h5>Selected ingredients</h5>
+      <p style="text-decoration-line: underline">Ingredients that you have</p>
+      <% @selected_ingredients.each do |selected_ingredient| %>
+        <b style="color:green"><%= selected_ingredient.name %><br></b>
+      <% end %>
+      <br>
+      <p style="text-decoration-line: underline">Ingredients you might need</p>
+      <% @ingredients_not_included.each do |not_selected_ingredient| %>
+        <b style="color:red"><%= not_selected_ingredient.name %><br></b>
+      <% end %>
 
-
-  </div>
 <% else %>
-  <p>No se encontraron recetas con los ingredientes seleccionados.</p>
+  <p>No recipes found with the ingredients selected. Try selecting other ingredients</p>
 <% end %>
+</div>
+</div>

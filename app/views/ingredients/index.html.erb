@@ -1,13 +1,41 @@
-<!-- app/views/recipes/search.html.erb -->
-<h1>Buscar recetas por ingredientes</h1>
+<h1>Ingredients selector</h1>
 <%= form_tag(recipes_search_path, method: :get, class: "form-inline") do %>
   <div class="form-group">
-    <label for="ingredient_ids">Selecciona ingredientes:</label>
+    <input class="form-control" id="myInput" type="text" placeholder="Search..">
+    <label for="ingredient_ids">Select ingredients (maximum 5):</label>
     <select multiple class="form-control" id="ingredient_ids" name="ingredients[]">
       <% @ingredients.each do |ingredient| %>
-        <option value="<%= ingredient.id %>"><%= ingredient.name %></option>
+        <option value="<%= ingredient.id %>"><%= ingredient.name.gsub(/\d+/, '').gsub('cup', '').gsub('teaspoon', '').gsub('spoon', '').gsub('½', '').gsub('⅔', '').gsub('s ', '').strip %></option>
       <% end %>
     </select>
   </div>
-  <button type="submit" class="btn btn-primary">Buscar</button>
+  <button type="submit" class="btn btn-primary">Search</button>
 <% end %>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var select = document.getElementById('ingredient_ids');
+        var maxSelections = 5;
+
+        $('#ingredient_ids option').mousedown(function (e) {
+            e.preventDefault();
+            $(this).prop('selected', !$(this).prop('selected'));
+
+            var selectedOptions = $('#ingredient_ids option:selected');
+            if (selectedOptions.length > maxSelections) {
+                alert('You can select maximum ' + maxSelections + ' ingredients.');
+                $(this).prop('selected', false);
+            }
+
+            return false;
+        });
+
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#ingredient_ids option").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+        });
+    });
+</script>
+
