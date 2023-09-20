@@ -1,14 +1,22 @@
 <!-- app/views/recipes/search.html.erb -->
 <h1>Recipes that you can cook:</h1>
 <% if @recipes.any? %>
-  <ul style="list-style: none">
+  <div style="list-style: none">
     <% @recipes.each do |recipe| %>
-      <li>
-        <%=  recipe.title %><br>
+     <h2> <%=  recipe.title %></h2>
         <%= image_tag recipe.image, alt: recipe.title, style: 'width: 150px' %>
-      </li>
     <% end %>
-  </ul>
+    <h5>Selected ingredients</h5>
+    <% @selected_ingredients.each do |selected_ingredient| %>
+        <b style="color:green"><%=  selected_ingredient.name %><br></b>
+    <% end %>
+
+    <%     @ingredients_not_included.each do |selected_ingredient| %>
+      <b style="color:red"><%=  selected_ingredient.name %><br></b>
+    <% end %>
+
+
+  </div>
 <% else %>
   <p>No se encontraron recetas con los ingredientes seleccionados.</p>
 <% end %>

@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'ingredients/index'
   resources :ingredients, only: [:index]
 
+  get 'ingredients/search'
+
   get 'home/index'
   resources :home, only: [:index]
   root 'home#index'
