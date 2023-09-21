@@ -21,13 +21,13 @@ namespace :db do
         )
       end
 
-      # Verificar si 'ingredients' está presente en el JSON antes de intentar agregarlos
+     
       if item['ingredients'].present?
         ingredients = item['ingredients'].map do |ingredient_name|
           Ingredient.find_or_create_by(name: ingredient_name)
         end
 
-        # Agregar los ingredientes al registro de la receta
+
         recipe.ingredients << ingredients
       end
     end
