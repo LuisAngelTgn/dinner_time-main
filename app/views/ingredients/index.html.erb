@@ -5,7 +5,8 @@
     <label for="ingredient_ids">Select ingredients (maximum 5):</label>
     <select multiple class="form-control" id="ingredient_ids" name="ingredients[]" style="height: 210px;">
       <% @ingredients.each do |ingredient| %>
-        <option value="<%= ingredient.id %>"><%= ingredient.name.gsub(/\d+/, '').gsub('(. ounce)', '').gsub('cup', '').gsub('( ounce)', '').gsub('. ', '').gsub('½', '').gsub('⅔', '').gsub('s ', '').strip %></option>
+        <option value="<%= ingredient.id %>"><%= ingredient.name.strip %></option># Here I would like to use .gsub(/\d+/, '') to hide numbers or to hide other values but it's necessary unless
+        I improve the values of the database
       <% end %>
     </select>
     <h5>Selected ingredients</h5>
