@@ -10,10 +10,10 @@ namespace :db do
       recipe = Recipe.find_by(title: item['title'])
 
       if recipe
-        # Actualizar el registro existente
+
         recipe.update(image: item['image'])
       else
-        # Crear un nuevo registro si no existe
+
         recipe = Recipe.create!(
           title: item['title'],
           description: item['description'],

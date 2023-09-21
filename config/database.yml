@@ -12,12 +12,11 @@ development:
 
 #test:
 #  <<: *default
-#  database: tu_base_de_datos_de_pruebas
+#  database: 
 
-#production:
-#  <<: *default
-#  database: tu_base_de_datos_de_produccion
-
+production:
+  <<: *default
+  database: dinner_time_db_production
 
 
 # SQLite. Versions 3.8.0 and up are supported.

@@ -53,7 +53,7 @@
         function updateSelectedIngredientsList() {
             var selectedOptions = $('#ingredient_ids option:selected');
             var selectedIngredientsList = $('#selectedIngredientsList');
-            selectedIngredientsList.empty(); // Limpiar la lista actual
+            selectedIngredientsList.empty();
 
             selectedOptions.each(function () {
                 var ingredientName = $(this).text();
