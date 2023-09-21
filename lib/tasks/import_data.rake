@@ -21,7 +21,7 @@ namespace :db do
         )
       end
 
-     
+
       if item['ingredients'].present?
         ingredients = item['ingredients'].map do |ingredient_name|
           Ingredient.find_or_create_by(name: ingredient_name)
