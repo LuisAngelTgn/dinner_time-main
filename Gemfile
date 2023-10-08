@@ -29,6 +29,7 @@ gem "jbuilder"
 
 gem 'mysql2', '~> 0.5.5'
 
+gem 'dotenv-rails', groups: [:development, :test]
 
 # Use jquery
 gem 'jquery-rails'
@@ -76,3 +77,5 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "dockerfile-rails", ">= 1.5", :group => :development
