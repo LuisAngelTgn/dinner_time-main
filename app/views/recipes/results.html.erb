@@ -8,20 +8,24 @@
     }
 </style>
 
+
+<%= render 'ingredients/selector' %>
+
+
 <h1>Recipes that you can choose from:</h1>
 <% if @recipes.any? %>
   <div style="list-style: none; margin-top: 20px " class="row">
     <div class="col-md-9 ">
-      <%  @recipes.sort_by { |recipe| (recipe.ingredients & @selected_ingredients).count }.reverse.first(12).each do |recipe| %>
+      <%  @recipes.sort_by { |recipe| (recipe.ingredients & @related_ingredients).count }.reverse.first(30).each do |recipe| %>
         <div class="card">
           <div style="width: 100%"> <%= image_tag recipe.image, alt: recipe.title, style: "width:100%;" %></div>
           <div class="card-body">
-            <h5 class="card-title"><%= recipe.title %></h5>
+            <h5 class="card-title"><%= link_to recipe.title, recipe_path(recipe) %></h5>
             <p style="text-decoration-line: underline">Ingredients that you have</p>
             <% ingredients_recipe = recipe.ingredients
                ingredients_recipe.each do |ingredient|
             %>
-              <% if @selected_ingredients.include?(ingredient) %>
+              <% if @related_ingredients.include?(ingredient) %>
                 <li style="color:green"><%= ingredient.name %></li>
               <% end %>
             <% end %>
@@ -30,7 +34,7 @@
             <% ingredients_recipe = recipe.ingredients
                ingredients_recipe.each do |ingredient|
             %>
-              <% unless @selected_ingredients.include?(ingredient) %>
+              <% unless @related_ingredients.include?(ingredient) %>
                 <li style="color:red"><%= ingredient.name %></li>
               <% end %>
             <% end %>
@@ -39,22 +43,23 @@
       <% end %>
     </div>
 
-    <div class="col-md-3 " style="background-color: #c5e1f9; height: 800px;
-      padding: 2% 0%;
-      overflow: auto;">
-      <h5>Selected ingredients</h5>
-      <p style="text-decoration-line: underline">Ingredients that you have</p>
-      <% @selected_ingredients.each do |selected_ingredient| %>
-        <b style="color:green"><%= selected_ingredient.name %><br></b>
-      <% end %>
-      <br>
-      <p style="text-decoration-line: underline">Ingredients you might need</p>
-      <% @ingredients_not_included.each do |not_selected_ingredient| %>
-        <b style="color:red"><%= not_selected_ingredient.name %><br></b>
-      <% end %>
 
 <% else %>
   <p>No recipes found with the ingredients selected. Try selecting other ingredients</p>
 <% end %>
+
+<div class="col-md-3 " style="background-color: #c5e1f9; height: 800px;
+  padding: 2% 0%;
+  overflow: auto;">
+  <h5>Selected ingredients</h5>
+  <p style="text-decoration-line: underline">Ingredients that you have</p>
+  <% @unique_ingredients.uniq.each do |ingredient| %>
+    <li style="color:green"><%= ingredient.exact_name.capitalize %></li>
+  <% end %>
+  <br>
+  <p style="text-decoration-line: underline">Ingredients you might need</p>
+  <% @unique_ingredients_not_included.each do |not_selected_ingredient| %>
+    <b style="color:red"><%= not_selected_ingredient.exact_name.capitalize %><br></b>
+  <% end %>
 </div>
 </div>

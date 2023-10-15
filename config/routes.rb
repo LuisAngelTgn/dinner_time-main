@@ -14,4 +14,6 @@ Rails.application.routes.draw do
 
   get '/recipes/search', to: 'recipes#search'
 
+  resources :recipes, only: [:show]
+
 end

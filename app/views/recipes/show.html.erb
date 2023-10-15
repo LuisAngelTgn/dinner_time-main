@@ -1,0 +1,13 @@
+<%#= render partial: 'recipes_selection' %>
+
+<h1><%= @recipe.title %></h1>
+
+<p><strong>Ingredients:</strong></p>
+<ul style = "list-style: none;">
+  <% @recipe.ingredients.each do |ingredient| %>
+    <li><%= ingredient.name %></li>
+  <% end %>
+</ul>
+
+<div style="width: 100%"> <%= image_tag @recipe.image, alt: @recipe.title, style: "width:30%;" %></div>
+
