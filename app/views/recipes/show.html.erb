@@ -2,12 +2,23 @@
 
 <h1><%= @recipe.title %></h1>
 
-<p><strong>Ingredients:</strong></p>
-<ul style = "list-style: none;">
+<h4>Ingredients:</h4>
+<ul style="list-style: none;">
   <% @recipe.ingredients.each do |ingredient| %>
     <li><%= ingredient.name %></li>
   <% end %>
 </ul>
+<h4>Cook time (minutes)</h4>
+<p><%= @recipe.cook_time %></p>
+<h4>Preparation time (minutes)</h4>
+<p><%= @recipe.prep_time %></p>
+<h4>Author</h4>
+<p><%= @recipe.author %></p>
+<h4>Category</h4>
+<p><%= @recipe.category %></p>
+<h4>Ratings</h4>
+<p><%= @recipe.ratings %></p>
+
 
 <div style="width: 100%"> <%= image_tag @recipe.image, alt: @recipe.title, style: "width:30%;" %></div>
 

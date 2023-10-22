@@ -21,7 +21,7 @@ Ingredient.all.each do |ingredient|
 end
 
 Ingredient.all.each do |ingredient|
-  exact_name = ingredient.exact_name.gsub(/¾/, '').gsub(/\(12 fluid ounce\)/i, '')
+  exact_name = ingredient.exact_name.gsub('Mashed potatoes:', 'Mashed potatoes')
   ingredient.update(exact_name: exact_name.strip) # Elimina espacios en blanco adicionales
 end
 
@@ -30,5 +30,9 @@ Ingredient.all.each do |ingredient|
   ingredient.update(exact_name: exact_name.strip) # Elimina espacios en blanco adicionales
 end
 
+Ingredient.all.each do |ingredient|
+  exact_name = ingredient.exact_name.gsub(/S kosher salt|Sea salt, or/i, 'salt')
+  ingredient.update(exact_name: exact_name.strip)
+end
 
 

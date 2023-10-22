@@ -11,13 +11,25 @@ namespace :db do
 
       if recipe
 
-        recipe.update(image: item['image'])
+        recipe.update(
+          image: item['image'],
+          ratings: item['ratings'],
+          cook_time: item['cook_time'],
+          prep_time: item['prep_time'],
+          category: item['category'],
+          author: item['author']
+        )
       else
 
         recipe = Recipe.create!(
           title: item['title'],
           description: item['description'],
-          image: item['image']
+          image: item['image'],
+          ratings: item['ratings'],
+          cook_time: item['cook_time'],
+          prep_time: item['prep_time'],
+          category: item['category'],
+          author: item['author']
         )
       end
 
