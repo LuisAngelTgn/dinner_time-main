@@ -12,21 +12,15 @@ class RecipesController < ApplicationController
     # @ingredients = @ingredients.uniq { |ingredient| ingredient.exact_name }
 
     if params[:ingredients].present?
-      # selected_ingredient = params[:ingredients]
-      # @selected_ingredients = Ingredient.where(id: selected_ingredient)
-
 
       selected_ingredient = JSON.parse(params[:ingredients].first)
-      # selected_ingredients = Ingredient.where(exact_name: selected_ingredient)
-      # Supongamos que selected_ingredient es un arreglo de patrones de búsqueda
-      # Ejemplo: selected_ingredient = ["milk", "oil"]
-      # Supongamos que selected_ingredient es un arreglo de patrones de búsqueda
-      # Ejemplo: selected_ingredient = ["milk", "oil"]
 
-      # Construye un patrón regex que busca al menos una coincidencia de palabras en exact_name
+      @user_ingredients = selected_ingredient
+
+      # Construir un patrón regex que busca al menos una coincidencia de palabras en exact_name
       regex_pattern = selected_ingredient.map { |pattern| "\\b#{Regexp.escape(pattern)}\\b" }.join("|")
 
-      # Utiliza la función REGEXP para buscar coincidencias en exact_name
+      # Utilizar la función REGEXP para buscar coincidencias en exact_name
       selected_ingredients = Ingredient.where("exact_name REGEXP ?", regex_pattern)
 
       selected_exact_names = selected_ingredients.pluck(:exact_name)

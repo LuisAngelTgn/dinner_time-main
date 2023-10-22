@@ -32,7 +32,7 @@
           <% else %>
             <span class="badge text-bg-danger rating">Rating: <%= recipe.ratings %></span>
             <% end %>
-          <div style="width: 100%"> <%= image_tag recipe.image, alt: recipe.title, style: "width:100%;" %></div>
+          <div style="width: 100%"> <%= image_tag recipe.image, alt: recipe.title, style: "width:100%; height:200px" %></div>
           <div class="card-body">
             <h5 class="card-title"><%= link_to recipe.title, recipe_path(recipe), target: "_blank" %></h5>
             <p style="text-decoration-line: underline">Ingredients that you have</p>
@@ -67,8 +67,8 @@
   overflow: auto;">
   <h5>Selected ingredients</h5>
   <p style="text-decoration-line: underline">Ingredients that you have</p>
-  <% @unique_ingredients.uniq.each do |ingredient| %>
-    <li style="color:green"><%= ingredient.exact_name.capitalize %></li>
+  <% @user_ingredients.uniq.each do |ingredient| %>
+    <li style="color:green"><%= ingredient.capitalize %></li>
   <% end %>
   <br>
   <p style="text-decoration-line: underline">Ingredients you might need</p>
