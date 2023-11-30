@@ -72,7 +72,7 @@
   <% end %>
   <br>
   <p style="text-decoration-line: underline">Ingredients you might need</p>
-  <% @unique_ingredients_not_included.each do |not_selected_ingredient| %>
+  <% @unique_ingredients_not_included.uniq.each do |not_selected_ingredient| %>
     <b style="color:red"><%= not_selected_ingredient.exact_name.capitalize %><br></b>
   <% end %>
 </div>

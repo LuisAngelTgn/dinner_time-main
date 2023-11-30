@@ -4,7 +4,7 @@
 
 <h4>Ingredients:</h4>
 <ul style="list-style: none;">
-  <% @recipe.ingredients.each do |ingredient| %>
+  <% @recipe.ingredients.uniq.each do |ingredient| %>
     <li><%= ingredient.name %></li>
   <% end %>
 </ul>

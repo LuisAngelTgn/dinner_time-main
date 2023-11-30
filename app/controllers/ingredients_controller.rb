@@ -5,6 +5,4 @@ class IngredientsController < ApplicationController
     @ingredients = @ingredients.uniq { |ingredient| ingredient.exact_name }
   end
 
-
-
 end
